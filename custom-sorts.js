@@ -47,14 +47,30 @@ function reverseBaseSort(arr) {
 
 function frequencySort(arr) {
   let freq = {};
+  let sortedArr = []
+  
   arr.forEach(ele=>{
     if(freq[ele]===undefined){
       freq[ele]=1
     } else freq[ele]++;
   })
+
   const valArr = Object.entries(freq)
-  console.log(valArr)
+  valArr.sort(function (a, b) {
+    return a[1] - b[1]
+  });
+
+  for(let i = 0;i<valArr.length;i++){
+    let pairs = valArr[i];
+    for(let i = 0; i<pairs[1];i++){
+      sortedArr.push(parseInt(pairs[0]))
+    }
+  }
+  return sortedArr
 }
+const arr2 = [2, 3, 1, 3, 2];
+const arr3 = [-1, 1, -6, 4, 5, -6, 1, 4, 1];
+console.log(frequencySort(arr2))
 
 module.exports = [
   oddEvenSort,
