@@ -48,18 +48,36 @@ function reverseBaseSort(arr) {
 function frequencySort(arr) {
   let freq = {};
   let sortedArr = []
-  
+
+  //set object with key/value pairs
   arr.forEach(ele=>{
     if(freq[ele]===undefined){
       freq[ele]=1
     } else freq[ele]++;
   })
 
+  //turn object into array
   const valArr = Object.entries(freq)
+
+  //sorts by value
   valArr.sort(function (a, b) {
     return a[1] - b[1]
   });
+  
+  //cases for increasing order & same value
+  let i = 0;
+  while(valArr[i+1]){
+    if (valArr[i][1] === valArr[i + 1][1]) {
+      if (valArr[i][0] < valArr[i + 1][0]) {
+        let temp = valArr[i]
+        valArr[i] = valArr[i + 1]
+        valArr[i + 1] = temp
+      }
+    }
+    i++
+  }
 
+  //create new array from k/v 2D array
   for(let i = 0;i<valArr.length;i++){
     let pairs = valArr[i];
     for(let i = 0; i<pairs[1];i++){
